@@ -87,12 +87,12 @@ bool Game::getIsGameWon() {
 
 void Game::setup() {
     // Set up LED pins
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < sizeof(this->_ledPins); i++) {
         pinMode(this->_ledPins[i], OUTPUT);
     }
 
     // Set up button pins
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < sizeof(this->_buttonPins); i++) {
         pinMode(this->_buttonPins[i], INPUT_PULLUP);
     }
 
@@ -100,7 +100,7 @@ void Game::setup() {
     pinMode(this->_piezoPin, OUTPUT);
 
     // Set up RGB pins
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < sizeof(this->_rgbPins); i++) {
         pinMode(this->_rgbPins[i], OUTPUT);
     }
 

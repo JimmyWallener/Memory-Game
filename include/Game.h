@@ -6,7 +6,7 @@
 
 class Game {
     private:
-        byte _ledPins[3]{}; // 4 LED pins
+        byte _ledPins[3]{}; // 3 LED pins
         byte _buttonPins[4]{}; // 4 button pins
         byte _piezoPin{}; // piezo pin
         byte _rgbPins[3]{}; // 3 RGB pins
