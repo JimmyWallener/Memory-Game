@@ -6,7 +6,7 @@
 
 class Game {
     private:
-        byte _ledPins[4]{}; // 4 LED pins
+        byte _ledPins[3]{}; // 4 LED pins
         byte _buttonPins[4]{}; // 4 button pins
         byte _piezoPin{}; // piezo pin
         byte _rgbPins[3]{}; // 3 RGB pins
@@ -22,7 +22,7 @@ class Game {
     public:
         Player player{0, 0, 0}; // player object
 
-        Game(byte (&ledPins)[4], byte (&buttonPins)[4], byte &piezoPin, byte (&rgbPins)[3], int &potentiometerPin){};
+        Game(const byte (&ledPins)[3], const byte (&buttonPins)[4], const byte &piezoPin, const byte (&rgbPins)[3], const int &potentiometerPin){};
         void setSequenceLength(byte);
         void setSequence(size_t);
         void setUserSequenceLength(byte);

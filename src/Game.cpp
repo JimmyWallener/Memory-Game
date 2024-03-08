@@ -1,17 +1,22 @@
 #include "../include/Game.h"
 #include <Arduino.h>
 
-Game::Game(byte (&ledPins)[4], byte (&buttonPins)[4], byte &piezoPin, byte (&rgbPins)[3], int &potentiometerPin) {
-    for (int i = 0; i < 4; i++) {
+Game::Game(const byte (&ledPins)[3], const byte (&buttonPins)[4], const byte &piezoPin, const byte (&rgbPins)[3], const int &potentiometerPin) {
+    
+    if(sizeof(ledPins) == sizeof(rgbPins)) {
+          for (int i = 0; i < sizeof(ledPins); i++) {
         this->_ledPins[i] = ledPins[i];
+        this->_rgbPins[i] = ledPins[i];
+    }
+    }
+
+   for (int i = 0; i < sizeof(buttonPins); i++) {
         this->_buttonPins[i] = buttonPins[i];
     }
+
     this->_piezoPin = piezoPin;
-    for (int i = 0; i < 3; i++) {
-        this->_rgbPins[i] = rgbPins[i];
-    }
+
     this->_potentiometerPin = potentiometerPin;
-    this->_sequenceLength = 4;
 }
 
 // Setters and getters
