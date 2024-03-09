@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "Game.cpp"
+#include "Game.h"
 
 
 // Define the arrays and variables for the constructor
@@ -19,6 +19,6 @@ void setup() {
 }
 
 void loop() {
-  
+  game.play();
 }
 

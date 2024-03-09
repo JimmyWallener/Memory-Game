@@ -22,7 +22,7 @@ class Game {
     public:
         Player player{0, 0, 0}; // player object
 
-        Game(const byte (&ledPins)[3], const byte (&buttonPins)[4], const byte &piezoPin, const byte (&rgbPins)[3], const int &potentiometerPin){};
+        Game(const byte[], const byte[], const byte, const byte[], const int);
         void setSequenceLength(byte);
         void setSequence(size_t);
         void setUserSequenceLength(byte);
@@ -30,10 +30,13 @@ class Game {
         void setTime(unsigned long);
         void setIsGameOver(bool);
         void setIsGameWon(bool);
+        void setPlayerScore(unsigned int);
+        void setGameMode();
         byte getSequenceLength();
         byte* getSequence();
         byte getUserSequenceLength();
         byte* getUserSequence();
+        void playSequence();
         unsigned long getTime();
         bool getIsGameOver();
         bool getIsGameWon();
