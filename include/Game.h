@@ -2,6 +2,7 @@
 
 #include <Arduino.h>
 #include "Player.h"
+#include "ModeLight.h"
 
 
 class Game {
@@ -21,6 +22,7 @@ class Game {
 
     public:
         Player player{0, 0, 0}; // player object
+        ModeLight modeLight{}; // mode light object
 
         Game(const byte[], const byte[], const byte, const byte[], const int);
         void setSequenceLength(byte);

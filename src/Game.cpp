@@ -132,7 +132,7 @@ void Game::setup() {
   // Defines RGB LED Color and difficultlevel based on potentiometer value
   void Game::setGameMode() {
     int potValue = analogRead(this->_potentiometerPin); // read the value from potentiometer
-    byte mappedValue = map(potValue,  0,  1023,  0,  2); // maps the potentiometer value to a 0-3 range
+    byte mappedValue = map(potValue,  0,  1023,  0,  3); // maps the potentiometer value to a 0-3 range
 	
     Serial.println(mappedValue);
 
