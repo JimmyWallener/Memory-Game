@@ -3,22 +3,26 @@
 #include "../include/Button.h"
 #include <Arduino.h>
 
-Button::Button(const byte buttonPins[], const size_t numButtons) {
-    this->numButtons = numButtons;
-    for (size_t i = 0; i < numButtons; i++) {
-        this->buttonPins[i] = buttonPins[i];
-        this->lastButtonState[i] = LOW;
-        this->lastDebounceTime[i] = 0;
-    }
-}
+enum ButtonState {
+  RELEASED = 0,
+  PRESSED = 1
+};
 
-void Button::setup() {
+enum ButtonIndex {
+  RED_BUTTON = 1,
+  YELLOW_BUTTON = 2,
+  BLUE_BUTTON = 3,
+  GREEN_BUTTON = 4,
+  SELECT_BUTTON = 5
+};
+
+void Button::initialize() const {
     for (size_t i = 0; i < this->numButtons; i++) {
         pinMode(this->buttonPins[i], INPUT_PULLUP);
     }
 }
 
-byte Button::readButtons() {
+uint8_t Button::getState() {
   for (size_t i = 0; i < this->numButtons; i++) {
     int reading = digitalRead(this->buttonPins[i]);
 
@@ -30,33 +34,27 @@ byte Button::readButtons() {
 
     if ((millis() - this->lastDebounceTime[i]) < debounceDelay) {
       // Update state only if debounce time has passed
-      return i + 1; // Return index for button press
+      return PRESSED + i; // Return index for button press
     }
   }
-  return 0; // No button press or release detected
+  return RELEASED; // No button press or release detected
 }
 
-byte Button::mapButtons() {
-  byte button = this->readButtons();
+uint8_t Button::map() {
+  uint8_t button = this->getState();
   switch(button) {
     case 1:
-      return 1;
-      break;
+      return RED_BUTTON;
     case 2:
-      return 2;
-      break;
+      return YELLOW_BUTTON;
     case 3:
-      return 3;
-        break;
+      return BLUE_BUTTON;
     case 4:
-      return 4;
-      break;
+      return GREEN_BUTTON;
     case 5:
-      return 5;
-      break;
+      return SELECT_BUTTON;
     default:
         return 0;
-        break;
   }
     
 }
