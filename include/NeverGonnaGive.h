@@ -16,18 +16,18 @@
 
 void playNever()
 {
-// change this to make the song slower or faster
+// Tempo
 int tempo = 114;
 
-// change this to whichever pin you want to use
-int buzzerN = 11;
+// Vilken pin
+int buzzer = 11;
 
 // notes of the moledy followed by the duration.
 // a 4 means a quarter note, 8 an eighteenth , 16 sixteenth, so on
 // !!negative numbers are used to represent dotted notes,
 // so -4 means a dotted quarter note, that is, a quarter plus an eighteenth!!
 
-int melodyN[] = {
+int melody[] = {
 
 
   NOTE_A4,16, NOTE_B4,16, NOTE_D5,16, NOTE_B4,16,
@@ -48,21 +48,17 @@ int melodyN[] = {
 
 // sizeof gives the number of bytes, each int value is composed of two bytes (16 bits)
 // there are two values per note (pitch and duration), so for each note there are four bytes
-int notes = sizeof(melodyN) / sizeof(melodyN[0]) / 2;
+int notes = sizeof(melody) / sizeof(int); //arrayens längd
 
 // this calculates the duration of a whole note in ms
 int wholenote = (60000 * 4) / tempo;
 int divider = 0, noteDuration = 0;
 
+   for (int i=0; i<notes;i+=2) //Ittererar genom arrayen, varannan för att sära på ton och längd på ton
+   {
+    divider = melody[i + 1]; // längd på ton
 
-
-  // iterate over the notes of the melodyN.
-  // Remember, the array is twice the number of notes (notes + durations)
-  for (int thisNote = 0; thisNote < notes * 2; thisNote = thisNote + 2) {
-
-    // calculates the duration of each note
-    divider = melodyN[thisNote + 1];
-    if (divider > 0) {
+    if (divider > 0) {//räknar på längden på tonen.
       // regular note, just proceed
       noteDuration = (wholenote) / divider;
     } else if (divider < 0) {
@@ -71,15 +67,17 @@ int divider = 0, noteDuration = 0;
       noteDuration *= 1.5; // increases the duration in half for dotted notes
     }
 
-    // we only play the note for 90% of the duration, leaving 10% as a pause
-    tone(buzzerN, melodyN[thisNote], noteDuration);
+// we only play the note for 95% of the duration, leaving 5% as a pause
+    tone(buzzer, melody[i], noteDuration*0.95); //spelar tonen
 
     // Wait for the specief duration before playing the next note.
     delay(noteDuration);
 
     // stop the waveform generation before the next note.
-    noTone(buzzerN);
+    noTone(buzzer);
   }
+              
+  
 }
 
 #endif
