@@ -1,24 +1,24 @@
 #include <Arduino.h>
-#include "Game.cpp"
+#include "../include/Game.h"
+#include "../include/GameMode.h"
+#include "../include/Button.h"
+#include "../include/Player.h"
 
 
 // Define the arrays and variables for the constructor
-const byte ledPins[3] = {12, 11, 10};
-const byte buttonPins[4] = {8, 4, 3, 2};
-const byte piezoPin = 13;
-const byte rgbPins[3] = {5, 6, 9};
-const int potentiometerPin = A1;
 
-// Initialize Game class with constructor arguments
-Game game(ledPins, buttonPins, piezoPin, rgbPins, potentiometerPin);
+const uint8_t piezoPin = 13;
 
 void setup() {
   Serial.begin(9600);
-  game.setup();
+  delay(500);
+  
+
+ // game.setup();
   
 }
 
 void loop() {
-  
-}
 
+
+}
