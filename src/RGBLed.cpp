@@ -8,12 +8,11 @@ void RGBLed::turnOff(size_t index) {
     digitalWrite(this->rgbPins[index], LOW);
 }
 
-void RGBLed::startSequence(size_t index) {
-    randomSeed(analogRead(0));
-
-    for (size_t i = 0; i < index; i++) {
-        size_t ledIndex = random(0, 3);
-        this->sequence[i] = ledIndex;
+void RGBLed::setSequence(size_t index,size_t length) {
+    randomSeed(analogRead(A0));
+    this->sequenceLength = length;
+    for (size_t i = index; i < length; i++) {
+        this->sequence[i] = random(0, 4);
     }
 }
 
@@ -21,8 +20,7 @@ void RGBLed::playSequence() {
   
 
     int lightDelay = 1000; // temporary variable for testing purpose only
-
-    for (size_t i = 0; i < sizeof(this->sequence); i++) {
+    for (size_t i = 0; i < this->sequenceLength; i++) {
 
         analogWrite(GREEN, 0);
         analogWrite(RED, 0);
@@ -36,7 +34,8 @@ void RGBLed::playSequence() {
                 break;
             case 1: // Yellow Light
                 analogWrite(RED, 255);
-                analogWrite(GREEN, 255);
+                analogWrite(GREEN, 226);
+                analogWrite(BLUE, 0);
                 delay(lightDelay);
                 break;
             case 2: // Blue Light
@@ -56,3 +55,4 @@ void RGBLed::playSequence() {
     delay(500);
     // for testing purpose only
 }
+

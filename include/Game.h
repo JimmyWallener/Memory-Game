@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Button.h"
 #include "GameMode.h"
+#include "RGBLed.h"
 
 
 class Game {
@@ -14,7 +15,8 @@ class Game {
 
 
     public:
-        Game(){};
+        Game();
+        void setup();
         void play();
 };
 

@@ -1,17 +1,15 @@
 #include <Arduino.h>
 #include "../include/Game.h"
-#include "../include/GameMode.h"
-#include "../include/Button.h"
-#include "../include/Player.h"
 
 
-// Define the arrays and variables for the constructor
+
+
 
 const uint8_t piezoPin = 13;
 
 void setup() {
   Serial.begin(9600);
-  delay(500);
+  delay(1000);
   
 
  // game.setup();
@@ -19,6 +17,9 @@ void setup() {
 }
 
 void loop() {
-
+ // rgbLed.startSequence(0, 4);
+  //Serial.println(button.map());
+ // rgbLed.playSequence();
+  delay(1000);
 
 }

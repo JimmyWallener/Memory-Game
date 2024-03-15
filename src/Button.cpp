@@ -18,11 +18,12 @@ enum ButtonIndex {
 
 void Button::initialize() const {
     for (size_t i = 0; i < this->numButtons; i++) {
-        pinMode(this->buttonPins[i], INPUT_PULLUP);
+        pinMode(this->buttonPins[i], INPUT);
     }
 }
 
 uint8_t Button::getState() {
+  
   for (size_t i = 0; i < this->numButtons; i++) {
     int reading = digitalRead(this->buttonPins[i]);
 
