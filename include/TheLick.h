@@ -98,64 +98,45 @@
 #define NOTE_DS8 4978
 #define REST      0
 
-/*
-#define NOTE_A4  440
-#define NOTE_B4  494
-#define NOTE_CS5 554
 
-
-#define NOTE_D5  587
-#define NOTE_E5  659
-#define NOTE_FS5 740
-#define NOTE_A5  880
-#define REST      0*/
-
-void playTheLick(int l){
+void playTheLick(int l) //level för att höja pitchen
+{
 // change this to make the song slower or faster
-int tempoN = 180;
+int tempo = 180;
 
 // change this to whichever pin you want to use
-int buzzerN = 11;
+int buzzer = 11;
 
 // notes of the moledy followed by the duration.
 // a 4 means a quarter note, 8 an eighteenth , 16 sixteenth, so on
 // !!negative numbers are used to represent dotted notes,
 // so -4 means a dotted quarter note, that is, a quarter plus an eighteenth!!
 
-int melodyN[] = {
+int melody[] = {
 
 
     NOTE_D1,8, NOTE_E1,8, NOTE_F1,8, NOTE_G1,8, NOTE_E1,4, NOTE_C1,8, NOTE_D1,2,//The lick
-   // NOTE_D5,8, NOTE_E5,8, NOTE_F5,8, NOTE_G5,8, NOTE_E5,4, NOTE_C5,8, NOTE_D5,2,//The lick
-//69, 8, 78, 8, 82, 8, 93, 69, 8, 65,8,69,2
 
 };
-int wholenote = (60000 * 4) / tempoN; //längden på tonen
-
+int wholenote = (60000 * 4) / tempo; //längden på tonen
+int notes = sizeof(melody) / sizeof(int); //arrayens längd
 
    for (int j = 0; j < l; j++) //dubblar inten (tonen) för varje level. 
    {
-       for (int i = 0; i < 14; i++)
+       for (int i = 0; i <notes; i+=2)//eftersom att vartannat värde är längd på tonen
        {
-           if (i % 2 == 0 || i == 0)//eftersom att vartannat värde är längd på tonen
-           {
-   
-               melodyN[i] = (melodyN[i] * 2);
-                  
-  
-           }
-
+               melody[i] = (melody[i] * 2);    
        }
    }
-   for (int i=0; i<14;i++) //spelar upp 
+   for (int i=0; i<notes;i+=2) //spelar upp 
    {
-                tone(buzzerN, melodyN[i], (wholenote)/melodyN[i+1] );
+                tone(buzzer, melody[i], (wholenote)/melody[i+1] );
 
                  // Wait for the specief duration before playing the next note.
-                delay((wholenote)/melodyN[i+1]);
+                delay((wholenote)/melody[i+1]);
 
                       // stop the waveform generation before the next note.
-                noTone(buzzerN);
+                noTone(buzzer);
    }
 
 
