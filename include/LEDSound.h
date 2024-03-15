@@ -27,21 +27,7 @@ R_LED, Y_LED, B_LED,  G_LED,
 delay(time);
 
 
-/*
-int wholenote = (60000 * 4) / tempo; //längden på tonen
 
-
-   for (int i=0; i<8;i++) //spelar upp 
-   {
-                tone(buzzerN, melodyN[i], (wholenote)/melodyN[i+1] );
-
-                 // Wait for the specief duration before playing the next note.
-                delay((wholenote)/melodyN[i+1]);
-
-                      // stop the waveform generation before the next note.
-                noTone(buzzerN);
-   }
-*/
 
 }
 
