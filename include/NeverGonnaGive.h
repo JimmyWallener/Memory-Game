@@ -12,7 +12,7 @@
 #define NOTE_E5  659
 #define NOTE_FS5 740
 #define NOTE_A5  880
-#define REST      0
+
 
 void playNever()
 {
@@ -22,10 +22,12 @@ int tempo = 114;
 // Vilken pin
 int buzzer = 11;
 
-// notes of the moledy followed by the duration.
-// a 4 means a quarter note, 8 an eighteenth , 16 sixteenth, so on
-// !!negative numbers are used to represent dotted notes,
-// so -4 means a dotted quarter note, that is, a quarter plus an eighteenth!!
+// Not följd av dess värde(längd) varvas i arrayen. 
+
+// Notvärden och punkterade noter:
+// 4 är kvarts noter, 8, är åttonndel, 16 är sextondel osv, 
+// negativa tal är punkterade noter, -4 är därmed en kvarts + en åttondel
+// Negativa tal har ingen annan funktion än att skilja punkerade noter från de som inte är punkterade. 
 
 int melody[] = {
 
@@ -46,34 +48,37 @@ int melody[] = {
 
 };
 
-// sizeof gives the number of bytes, each int value is composed of two bytes (16 bits)
-// there are two values per note (pitch and duration), so for each note there are four bytes
+
 int notes = sizeof(melody) / sizeof(int); //arrayens längd
 
-// this calculates the duration of a whole note in ms
+// Räknar ut längden på en hel not i ms
+
 int wholenote = (60000 * 4) / tempo;
 int divider = 0, noteDuration = 0;
 
-   for (int i=0; i<notes;i+=2) //Ittererar genom arrayen, varannan för att sära på ton och längd på ton
+   for (int i=0; i<notes;i+=2) // Ittererar genom arrayen, varannan för att sära på ton och längd på ton
    {
-    divider = melody[i + 1]; // längd på ton
+    divider = melody[i + 1]; // längd på noten
 
-    if (divider > 0) {//räknar på längden på tonen.
-      // regular note, just proceed
-      noteDuration = (wholenote) / divider;
-    } else if (divider < 0) {
-      // dotted notes are represented with negative durations!!
-      noteDuration = (wholenote) / abs(divider);
-      noteDuration *= 1.5; // increases the duration in half for dotted notes
+    if (divider > 0) {// om notvärdet inte är punkterat 
+      
+      noteDuration = (wholenote) / divider;  
+
+    } else if (divider < 0) { // om notvärdet är punkterat
+    
+      noteDuration = (wholenote) / abs(divider); 
+      noteDuration *= 1.5; // ökar notvärdet med 50%
     }
 
-// we only play the note for 95% of the duration, leaving 5% as a pause
+    // För att skapa luft eller mellanrum mellan tonerna spelas varje not 95% av längden med en pus på 5%.
     tone(buzzer, melody[i], noteDuration*0.95); //spelar tonen
 
-    // Wait for the specief duration before playing the next note.
+    // 
+    // Väntar på att ta nästa ton
     delay(noteDuration);
 
     // stop the waveform generation before the next note.
+    //Märkte ingen skillnad när jag tog bort denna.
     noTone(buzzer);
   }
               
