@@ -2,10 +2,17 @@
 
 #include <Arduino.h>
 #include "Player.h"
+<<<<<<< Updated upstream
+=======
+#include "Button.h"
+#include "GameMode.h"
+#include "RGBLed.h"
+>>>>>>> Stashed changes
 
 
 class Game {
     private:
+<<<<<<< Updated upstream
         byte _ledPins[4]{}; // 4 LED pins
         byte _buttonPins[4]{}; // 4 button pins
         byte _piezoPin{}; // piezo pin
@@ -39,5 +46,15 @@ class Game {
         bool getIsGameWon();
         void setup();
         void play();
+=======
+        unsigned long time{}; // time for timing game
+        bool isPlaying = true;
+
+    public:
+        void playEasy(RGBLed, Button);
+        void playMedium(RGBLed, Button);
+        void playHard(RGBLed, Button);
+        bool checkAnwser(RGBLed, Button, int);
+>>>>>>> Stashed changes
 };
 
