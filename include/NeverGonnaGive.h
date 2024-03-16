@@ -70,10 +70,10 @@ int divider = 0, noteDuration = 0;
       noteDuration *= 1.5; // ökar notvärdet med 50%
     }
 
-    // För att skapa luft eller mellanrum mellan tonerna spelas varje not 95% av längden med en pus på 5%.
+    // För att skapa luft eller mellanrum mellan tonerna spelas varje not 95% av längden med en paus på 5%.
     tone(buzzer, melody[i], noteDuration*0.95); //spelar tonen
 
-    // 
+    
     // Väntar på att ta nästa ton
     delay(noteDuration);
 
