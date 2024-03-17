@@ -56,4 +56,6 @@ void loop() {
     default:
         break;
   }
+  gamemode.gameOver(); // uses 
+  button.resetSelectButton(); // resets button so that you can play again
 }

@@ -44,3 +44,17 @@ uint8_t GameMode::setGameMode() {
             return 0;
     }
 }
+
+void GameMode::gameOver()
+{
+    for(int i = 0; i < 3; i++){
+        turnOn(0);
+        turnOn(1);
+        turnOn(2);
+        delay(200);
+        turnOff(0);
+        turnOff(1);
+        turnOff(2);
+        delay(200);
+    }
+}

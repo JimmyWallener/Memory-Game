@@ -19,4 +19,5 @@ class GameMode {
             pinMode(this->potentiometerPin, INPUT);
         }
         uint8_t setGameMode();
+        void gameOver();
 };

@@ -59,7 +59,7 @@ uint8_t Button::map() {
   } 
 }
 
-void Button::setButtonOrder(size_t counter)
+void Button::setButtonOrder(size_t counter) // sets playerGuesses in an array buttonOrder.
 {  
   size_t i = 0;
   uint8_t lastState;
@@ -84,8 +84,7 @@ uint8_t* Button::getButtonOrder(size_t counter)
   return buttonOrder;
 }
 
-void Button::clearButtonOrder(size_t counter){
-  for(size_t i = 0; i < counter; i++){
-    this->buttonOrder[i] = 0;
-  }
+void Button::resetSelectButton()
+{
+  lastButtonState[4] = LOW;
 }

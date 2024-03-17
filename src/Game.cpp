@@ -17,16 +17,16 @@ bool Game::checkAnwser(RGBLed rgbled, Button button, size_t counter) // for loop
 }
 
 
-void Game::playEasy(RGBLed rgbled, Button button) // bara fler färger
+void Game::playEasy(RGBLed rgbled, Button button) // just 1 more colour per iteration
 {
-    size_t counter = 4;
+    size_t counter = 4; // how many lamps you start out with
     rgbled.setSequence(0, counter);
+    bool isPlaying = true;
  
     while(isPlaying){
-        rgbled.playSequence();
+        rgbled.playSequence(500);
         if(checkAnwser(rgbled, button, counter)){
-            rgbled.addToSequence(counter);
-            button.clearButtonOrder(counter);
+            rgbled.addToSequence(counter); // adds to sequence using already existing sequence
             counter++;
             delay(2000);
         }else{
@@ -35,16 +35,44 @@ void Game::playEasy(RGBLed rgbled, Button button) // bara fler färger
     }
 }
 
-void Game::playMedium(RGBLed rgbled, Button button) // mindre delay
+void Game::playMedium(RGBLed rgbled, Button button) // New colours and less time lit up
 {
-    //int counter = 2; 
-    // lägga in en decreaseDelay funktion i RGBLed, sen köra chechAnswer och en liknande struktur som i playEasy
-    //rgbled.setSequence(0, counter);
-    //rgbled.playSequence();
-    //delay(500);
+    size_t counter = 4;
+    bool isPlaying = true;
+    int delayTimer = 500;
+ 
+    while(isPlaying){
+        rgbled.setSequence(0, counter);
+        rgbled.playSequence(delayTimer);
+        if(checkAnwser(rgbled, button, counter)){
+            if(delayTimer != 50){
+                delayTimer -= 50;
+            }
+            delay(2000);
+        }else{
+            isPlaying = false;
+        }
+    }
 }
 
-void Game::playHard(RGBLed rgbled, Button button) // bägge två
+void Game::playHard(RGBLed rgbled, Button button) // New coulors, less time and 1 more colour per iteration
 {
-    
+    size_t counter = 4;
+    bool isPlaying = true;
+    int delayTimer = 500;
+ 
+    while(isPlaying){
+        rgbled.setSequence(0, counter);
+        rgbled.playSequence(delayTimer);
+        if(checkAnwser(rgbled, button, counter)){
+            rgbled.addToSequence(counter);
+            counter++;
+            if(delayTimer != 50){
+                delayTimer -= 50;
+            }
+            delay(2000);
+        }else{
+            isPlaying = false;
+        }
+    }
 }

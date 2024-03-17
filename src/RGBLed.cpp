@@ -37,11 +37,8 @@ void RGBLed::addToSequence(size_t counter)
     }
 }
 
-void RGBLed::playSequence() {
+void RGBLed::playSequence(int lightDelay) {
   
-
-    int lightDelay = 400; // temporary variable for testing purpose only
-
     for (size_t i = 0; i < this->sequenceLength; i++) {
 
         analogWrite(GREEN, 0);
@@ -70,7 +67,6 @@ void RGBLed::playSequence() {
         }
 
     }
-    // for testing purpose only
     analogWrite(GREEN, 0);
     analogWrite(RED, 0);
     analogWrite(BLUE, 0);

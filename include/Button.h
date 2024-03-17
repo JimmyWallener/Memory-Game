@@ -20,6 +20,6 @@ class Button {
     void initialize() const; // Initialize the button pins
     uint8_t map(); // Map the button state to a number
     void setButtonOrder(size_t); // add buttonpresses to array which will be compared to sequence array.
-    void clearButtonOrder(size_t);
-    uint8_t* getButtonOrder(size_t); 
+    uint8_t* getButtonOrder(size_t);
+    void resetSelectButton(); 
 };
