@@ -58,3 +58,21 @@ uint8_t Button::map() {
   }
     
 }
+
+void Button::setButtonOrder(RGBLed rgbled)
+{  
+    bool loopIt = true;
+    for (size_t i = 0; i < rgbled.getSequenceLength(); i++){
+      while(loopIt){
+        uint8_t res = map();
+        if(res != 0){
+          this->buttonOrder[i] = res - 1;
+        }else{
+          i--;
+        }
+      }
+    }
+
+}
+
+uint8_t* Button::getButtonOrder(){return this->buttonOrder;}
