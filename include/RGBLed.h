@@ -23,7 +23,7 @@ class RGBLed {
             }
         }
         void setSequence(size_t, size_t);
-        void addToSequence(int);
+        void addToSequence(size_t);
         void playSequence();
         uint8_t* getSequence();
         size_t getSequenceLength(){return this->sequenceLength;}

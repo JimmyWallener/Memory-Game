@@ -12,8 +12,11 @@
 
 const uint8_t piezoPin = 13;
 Game game;
+
 Button button;
+
 RGBLed rgbled;
+
 GameMode gamemode;
 
 void setup() {
@@ -31,7 +34,7 @@ void loop() {
   while(selectGameMode){
     gameModeSelected = gamemode.setGameMode();
 
-    if(button.map() == 1){
+    if(button.map() == 5){
       selectGameMode = false; 
     }
   }

@@ -16,6 +16,6 @@ class Game {
         void playEasy(RGBLed, Button);
         void playMedium(RGBLed, Button);
         void playHard(RGBLed, Button);
-        bool checkAnwser(RGBLed, Button, int);
+        bool checkAnwser(RGBLed, Button, size_t);
 };
 

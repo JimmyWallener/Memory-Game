@@ -12,15 +12,29 @@ void RGBLed::setSequence(size_t index,size_t length) {
     randomSeed(analogRead(A0));
     this->sequenceLength = length;
     for (size_t i = index; i < length; i++) {
-        this->sequence[i] = random(0, 4);
+        uint8_t tempSequence = random(0, 4);
+        if(tempSequence == this->sequence[i - 1]){
+            i--;
+        }else{
+            this->sequence[i] = tempSequence;
+        }
     }
 }
 
-void RGBLed::addToSequence(int counter)
+void RGBLed::addToSequence(size_t counter)
 {
     randomSeed(analogRead(A0));
     this->sequence[counter] = random(0,4);
     this->sequenceLength++;
+
+    for (size_t i = counter; i < counter + 1; i++) {
+        uint8_t tempSequence = random(0, 4);
+        if(tempSequence == this->sequence[i - 1]){
+            i--;
+        }else{
+            this->sequence[i] = tempSequence;
+        }
+    }
 }
 
 void RGBLed::playSequence() {
@@ -36,8 +50,8 @@ void RGBLed::playSequence() {
         delay(1000);
 
         switch (this->sequence[i]) {
-            case 0: // Green Light
-                analogWrite(GREEN, 255);
+            case 0: // Red Light
+                analogWrite(RED, 255);
                 delay(lightDelay);
                 break;
             case 1: // Yellow Light
@@ -49,8 +63,8 @@ void RGBLed::playSequence() {
                 analogWrite(BLUE, 255);
                 delay(lightDelay);
                 break;
-            case 3: // Red Light
-                analogWrite(RED, 255);
+            case 3: // Green
+                analogWrite(GREEN, 255);
                 delay(lightDelay);
                 break;
         }
@@ -60,10 +74,9 @@ void RGBLed::playSequence() {
     analogWrite(GREEN, 0);
     analogWrite(RED, 0);
     analogWrite(BLUE, 0);
-    delay(500);
 }
 
 uint8_t* RGBLed::getSequence()
 {
-    return this->sequence;
+    return sequence;
 }

@@ -22,7 +22,7 @@ void Button::initialize() const {
     }
 }
 
-uint8_t Button::getState() {
+  uint8_t Button::getState() {
   for (size_t i = 0; i < this->numButtons; i++) {
     int reading = digitalRead(this->buttonPins[i]);
 
@@ -42,6 +42,7 @@ uint8_t Button::getState() {
 
 uint8_t Button::map() {
   uint8_t button = this->getState();
+  delay(50);
   switch(button) {
     case 1:
       return RED_BUTTON;
@@ -55,24 +56,36 @@ uint8_t Button::map() {
       return SELECT_BUTTON;
     default:
         return 0;
-  }
-    
+  } 
 }
 
-void Button::setButtonOrder(RGBLed rgbled)
+void Button::setButtonOrder(size_t counter)
 {  
-    bool loopIt = true;
-    for (size_t i = 0; i < rgbled.getSequenceLength(); i++){
-      while(loopIt){
-        uint8_t res = map();
-        if(res != 0){
-          this->buttonOrder[i] = res - 1;
-        }else{
-          i--;
-        }
-      }
-    }
+  size_t i = 0;
+  uint8_t lastState;
 
+  while(i < counter){
+    uint8_t res = map();
+    
+    if(res != 0 && res != 5 && res != lastState){
+        this->buttonOrder[i] = res - 1;
+        i++;
+        lastState = res;
+    }
+    
+    if(res == 0 && res == lastState){
+      lastState = 0;
+    }
+  }
 }
 
-uint8_t* Button::getButtonOrder(){return this->buttonOrder;}
+uint8_t* Button::getButtonOrder(size_t counter)
+{
+  return buttonOrder;
+}
+
+void Button::clearButtonOrder(size_t counter){
+  for(size_t i = 0; i < counter; i++){
+    this->buttonOrder[i] = 0;
+  }
+}
