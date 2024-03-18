@@ -13,6 +13,7 @@ class RGBLed {
         const uint8_t rgbPins[3] {RED, GREEN, BLUE};
         const size_t numLeds {3};
         uint8_t sequence[100];
+        size_t sequenceLength{4};
         void turnOn(size_t);
         void turnOff(size_t);
         size_t sequenceLength{4};

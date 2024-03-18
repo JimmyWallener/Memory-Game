@@ -4,18 +4,10 @@
 #include "../include/Button.h"
 #include "../include/Player.h"
 
-// Define the arrays and variables for the constructor
-// inisiera pins i setu
-// Game game ska vara global variabel
-// constructor eller klasser som inte är i metoder/funktioner
 
-const uint8_t piezoPin = 13;
 Game game;
-
 Button button;
-
 RGBLed rgbled;
-
 GameMode gamemode;
 
 void setup() {
