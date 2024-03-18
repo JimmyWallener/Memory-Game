@@ -4,7 +4,6 @@
 #include "../include/Button.h"
 #include "../include/Player.h"
 
-
 // Define the arrays and variables for the constructor
 // inisiera pins i setu
 // Game game ska vara global variabel
@@ -56,6 +55,7 @@ void loop() {
     default:
         break;
   }
-  gamemode.gameOver(); // uses 
+  gamemode.gameOver(); // uses
+  rgbled.reset();
   button.resetSelectButton(); // resets button so that you can play again
 }

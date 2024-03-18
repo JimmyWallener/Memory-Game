@@ -54,6 +54,7 @@ void RGBLed::playSequence(int lightDelay) {
             case 1: // Yellow Light
                 analogWrite(RED, 255);
                 analogWrite(GREEN, 255);
+                analogWrite(BLUE, 0);
                 delay(lightDelay);
                 break;
             case 2: // Blue Light
@@ -75,4 +76,9 @@ void RGBLed::playSequence(int lightDelay) {
 uint8_t* RGBLed::getSequence()
 {
     return sequence;
+}
+
+void RGBLed::reset()
+{
+    this->sequenceLength = 0;
 }
