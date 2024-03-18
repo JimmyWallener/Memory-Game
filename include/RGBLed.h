@@ -7,7 +7,7 @@ enum RGBColor {
     GREEN = 9,
     BLUE = 6
 };
-
+ 
 class RGBLed {
     private:
         const uint8_t rgbPins[3] {RED, GREEN, BLUE};
@@ -16,6 +16,7 @@ class RGBLed {
         size_t sequenceLength{4};
         void turnOn(size_t);
         void turnOff(size_t);
+        size_t sequenceLength{4};
     public:
         RGBLed() {
             for (size_t i = 0; i < numLeds; i++) {
@@ -23,5 +24,9 @@ class RGBLed {
             }
         }
         void setSequence(size_t, size_t);
-        void playSequence();
+        void addToSequence(size_t);
+        void playSequence(int);
+        void reset();
+        uint8_t* getSequence();
+        size_t getSequenceLength(){return this->sequenceLength;}
 };

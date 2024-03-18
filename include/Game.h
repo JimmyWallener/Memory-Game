@@ -10,13 +10,13 @@
 class Game {
     private:
         unsigned long time{}; // time for timing game
-        bool isGameOver{}; // game over flag
-        bool isGameWon{}; // game won flag
-
+        bool isPlaying = true;
 
     public:
         Game();
-        void setup();
-        void play();
+        void playEasy(RGBLed, Button);
+        void playMedium(RGBLed, Button);
+        void playHard(RGBLed, Button);
+        bool checkAnwser(RGBLed, Button, size_t);
 };
 

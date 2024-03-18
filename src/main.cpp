@@ -1,25 +1,53 @@
 #include <Arduino.h>
 #include "../include/Game.h"
+#include "../include/GameMode.h"
+#include "../include/Button.h"
+#include "../include/Player.h"
 
 
-
-
-
-const uint8_t piezoPin = 13;
+Game game;
+Button button;
+RGBLed rgbled;
+GameMode gamemode;
 
 void setup() {
   Serial.begin(9600);
-  delay(1000);
-  
-
- // game.setup();
-  
+  button.initialize();
+  button.getState();
+  delay(600);
 }
 
 void loop() {
- // rgbLed.startSequence(0, 4);
-  //Serial.println(button.map());
- // rgbLed.playSequence();
-  delay(1000);
 
+  int gameModeSelected;
+  bool selectGameMode = true;
+  
+  while(selectGameMode){
+    gameModeSelected = gamemode.setGameMode();
+
+    if(button.map() == 5){
+      selectGameMode = false; 
+    }
+  }
+  
+  switch (gameModeSelected)
+  {
+    case 1:
+      game.playEasy(rgbled, button);
+      break;
+
+    case 2:
+      game.playMedium(rgbled, button);
+      break;
+
+    case 3:
+      game.playHard(rgbled, button);
+      break;
+
+    default:
+        break;
+  }
+  gamemode.gameOver(); // uses
+  rgbled.reset();
+  button.resetSelectButton(); // resets button so that you can play again
 }

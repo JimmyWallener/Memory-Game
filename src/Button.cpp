@@ -18,12 +18,11 @@ enum ButtonIndex {
 
 void Button::initialize() const {
     for (size_t i = 0; i < this->numButtons; i++) {
-        pinMode(this->buttonPins[i], INPUT);
+        pinMode(this->buttonPins[i], INPUT_PULLUP);
     }
 }
 
-uint8_t Button::getState() {
-  
+  uint8_t Button::getState() {
   for (size_t i = 0; i < this->numButtons; i++) {
     int reading = digitalRead(this->buttonPins[i]);
 
@@ -43,6 +42,7 @@ uint8_t Button::getState() {
 
 uint8_t Button::map() {
   uint8_t button = this->getState();
+  delay(50);
   switch(button) {
     case 1:
       return RED_BUTTON;
@@ -56,6 +56,35 @@ uint8_t Button::map() {
       return SELECT_BUTTON;
     default:
         return 0;
-  }
+  } 
+}
+
+void Button::setButtonOrder(size_t counter) // sets playerGuesses in an array buttonOrder.
+{  
+  size_t i = 0;
+  uint8_t lastState;
+
+  while(i < counter){
+    uint8_t res = map();
     
+    if(res != 0 && res != 5 && res != lastState){
+        this->buttonOrder[i] = res - 1;
+        i++;
+        lastState = res;
+    }
+    
+    if(res == 0 && res == lastState){
+      lastState = 0;
+    }
+  }
+}
+
+uint8_t* Button::getButtonOrder(size_t counter)
+{
+  return buttonOrder;
+}
+
+void Button::resetSelectButton()
+{
+  lastButtonState[4] = LOW;
 }
